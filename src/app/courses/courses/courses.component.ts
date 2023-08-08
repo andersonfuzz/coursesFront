@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Course } from '../model/course';
+import { CoursesService } from '../services/courses.service';
 
 
 @Component({
@@ -8,12 +9,17 @@ import { Course } from '../model/course';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent {
-  courses: Course[] = [
-    { _id: '1', name: 'Js', category: 'Front' }
-  ];
+
+
+  courses: Course[] = [];
 
   displayedColumns: string[] = ['name', 'category'];
-  constructor() { }
 
+  constructor(private coursesService: CoursesService) {
+    this.courses = this.coursesService.list();
+
+
+
+  }
 
 }
