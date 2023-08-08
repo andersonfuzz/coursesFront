@@ -12,12 +12,12 @@ import { Observable } from 'rxjs';
 export class CoursesComponent {
 
 
-  courses: Observable<Course[]>;
+  courses$: Observable<Course[]>;
 
   displayedColumns: string[] = ['name', 'category'];
 
   constructor(private coursesService: CoursesService) {
-    this.courses = this.coursesService.list();
+    this.courses$ = this.coursesService.list();
 
 
 
