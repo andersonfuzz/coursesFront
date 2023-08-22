@@ -3,8 +3,8 @@ import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SnackServiceService } from 'src/app/shared/services/snack-service.service';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class CoursesComponent {
   displayedColumns: string[] = ['name', 'category', 'actions'];
 
   constructor(
+    private snackBar: SnackServiceService,
     private route: ActivatedRoute,
     private router: Router,
     private coursesService: CoursesService,
@@ -28,7 +29,7 @@ export class CoursesComponent {
     this.courses$ = this.coursesService.list()
       .pipe(
         catchError(error => {
-          this.onError('Erro ao carregar cursos');
+          snackBar.showMessage('erro ao carregar');
           return of([]);
         })
 
@@ -40,12 +41,6 @@ export class CoursesComponent {
     this.router.navigate(['new'], { relativeTo: this.route });
 
 
-  }
-
-  onError(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
-    });
   }
 
 }

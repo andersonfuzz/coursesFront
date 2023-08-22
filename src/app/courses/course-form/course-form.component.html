@@ -1,1 +1,40 @@
-<p>course-form works!</p>
+<mat-card>
+
+    <mat-card-content>
+
+        <mat-toolbar color="primary">Novo Curso</mat-toolbar>
+
+        <form [formGroup]="form">
+
+            <mat-card-content>
+
+                <mat-form-field>
+                    <input matInput placeholder="Nome" formControlName="name">
+                </mat-form-field>
+
+            </mat-card-content>
+
+            <mat-card-content>
+
+                <mat-form-field>
+
+                    <mat-label>Categoria</mat-label>
+
+                    <mat-select formControlName="category">
+                        <mat-option *ngFor="let category of categorys" [value]="category.value">
+                            {{category.value}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+            </mat-card-content>
+
+        </form>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+            <button mat-raised-button (click)="onCancel()">Cancelar</button>
+        </mat-card-actions>
+
+    </mat-card-content>
